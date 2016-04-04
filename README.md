@@ -1,55 +1,39 @@
-ZfMailer
-========
-[![Build Status](https://travis-ci.org/dwolke/ZfMailer.png)](https://travis-ci.org/dwolke/ZfMailer)
-[![Code Coverage](https://scrutinizer-ci.com/g/dwolke/ZfMailer/badges/coverage.png?s=7d5932c77bea64a417ac8e3da51dca6da1fcb22e)](https://scrutinizer-ci.com/g/dwolke/ZfMailer/)
-[![Latest Stable Version](https://poser.pugx.org/zf-commons/zfc-user/v/stable.png)](https://packagist.org/packages/zf-commons/zfc-user)
-[![Latest Unstable Version](https://poser.pugx.org/zf-commons/zfc-user/v/unstable.png)](https://packagist.org/packages/zf-commons/zfc-user)
+#ZfMailer
+---------
+
+[![Build Status](https://travis-ci.org/dwolke/ZfMailer.png)](https://travis-ci.org/dwolke/ZfMailer) [![Code Coverage](https://scrutinizer-ci.com/g/dwolke/ZfMailer/badges/coverage.png?s=7d5932c77bea64a417ac8e3da51dca6da1fcb22e)](https://scrutinizer-ci.com/g/dwolke/ZfMailer/) [![Latest Stable Version](https://poser.pugx.org/zf-commons/zfc-user/v/stable.png)](https://packagist.org/packages/zf-commons/zfc-user) [![Latest Unstable Version](https://poser.pugx.org/zf-commons/zfc-user/v/unstable.png)](https://packagist.org/packages/zf-commons/zfc-user)
 
 Created by Donnie W. Kalauer and the dwLabs team
 
-Introduction
-------------
+##Introduction
+--------------
 
-ZfMailer ist ein einfaches E-Mail-Modul für Zend Framework 2 und basiert
-auf Zend\Mail. E-Mails können im Textformat oder als MIME-konforme "Multi-Part"
-Mails verschickt werden. Das Versenden von E-Mails mit Anhängen wird ebenfals
-unterstützt.
+ZfMailer ist ein einfaches E-Mail-Modul für Zend Framework 2 und basiert auf Zend\Mail. E-Mails können im Textformat oder als MIME-konforme "Multi-Part" Mails verschickt werden. Das Versenden von E-Mails mit Anhängen wird ebenfalls unterstützt.
 
 Weitere Informationen und Beispiele sind unter [ZfMailer Wiki](https://github.com/dwolke/ZfMailer/wiki) verfügbar.
 
-Requirements
-------------
+##Requirements
+--------------
 
 * [Zend Framework 2](https://github.com/zendframework/zf2) (latest master)
 
-Installation
-------------
+##Installation
+--------------
 
-### Main Setup
+###Setup (via Composer)
 
-#### By cloning project
+1. Hinzufügen des Projekts zu deiner composer.json
 
-1. Install the [ZfcBase](https://github.com/ZF-Commons/ZfcBase) ZF2 module
-   by cloning it into `./vendor/`.
-2. Clone this project into your `./vendor/` directory.
+	$ require dwolke/zf-mailer
 
-#### With composer
+2. Installation
 
-1. Add this project and [ZfcBase](https://github.com/ZF-Commons/ZfcBase) in your composer.json:
+	$ composer update
 
-    ```json
-    "require": {
-        "zf-commons/zfc-user": "dev-master"
-    }
-    ```
 
-2. Now tell composer to download ZfcUser by running the command:
+###Nach der Installation
 
-    ```bash
-    $ php composer.phar update
-    ```
 
-#### Post installation
 
 1. Enabling it in your `application.config.php`file.
 
@@ -175,46 +159,3 @@ The following options are available:
   When user tries to login, is his/her state one of the following? Include null if
   you want user's with no state to login as well.
 
-Changing Registration Captcha Element
--------------------------------------
-
-**NOTICE** These instructions are currently out of date.
-
-By default, the user registration uses the Figlet captcha engine.  This is
-because it's the only one that doesn't require API keys.  It's possible to change
-out the captcha engine with DI.  For example, to change to Recaptcha, you would
-add this to one of your configuration files (global.config.php,
-module.config.php, or a dedicated recaptcha.config.php):
-
-    <?php
-    // ./config/autoload/recaptcha.config.php
-    return array(
-        'di'=> array(
-            'instance'=>array(
-                'alias'=>array(
-                    // OTHER ELEMENTS....
-                    'recaptcha_element' => 'Zend\Form\Element\Captcha',
-                ),
-                'recaptcha_element' => array(
-                    'parameters' => array(
-                        'spec' => 'captcha',
-                        'options'=>array(
-                            'label'      => '',
-                            'required'   => true,
-                            'order'      => 500,
-                            'captcha'    => array(
-                                'captcha' => 'ReCaptcha',
-                                'privkey' => RECAPTCHA_PRIVATE_KEY,
-                                'pubkey'  => RECAPTCHA_PUBLIC_KEY,
-                            ),
-                        ),
-                    ),
-                ),
-                'ZfcUser\Form\Register' => array(
-                    'parameters' => array(
-                        'captcha_element'=>'recaptcha_element',
-                    ),
-                ),
-            ),
-        ),
-    );
