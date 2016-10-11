@@ -34,8 +34,8 @@ return array(
         'connectionClass'  => 'login',
         'connectionConfig' => array(
           //'ssl'      => 'tls',
-          'username' => 'mailer@bikeshop-factory.de',
-          'password' => 'Happy2204?',
+          'username' => 'zzz@zzz.de',
+          'password' => 'xxx-xxx',
         ),
       ),
     ),
