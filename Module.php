@@ -10,6 +10,13 @@
 
 namespace ZfMailer;
 
+/**
+ * ZfMailer
+ *
+ * Simple Mailer for Zend Framework (Zend\Mail)
+ *
+ * @package Modul
+ */
 class Module
 {
 
