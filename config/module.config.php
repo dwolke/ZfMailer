@@ -44,6 +44,7 @@ return array(
 
   'service_manager' => array(
     'factories' => array(
+      'ZfMailerOptions' => 'ZfMailer\Options\ModuleOptionsFactory',
       'ZfMailer\Service\Mailer' => 'ZfMailer\Service\MailerFactory',
       'ZfMailer\Service\MailMessage' => 'ZfMailer\Service\MailMessageFactory',
       'ZfMailer\Service\Transport' => 'ZfMailer\Service\MailTransportFactory',

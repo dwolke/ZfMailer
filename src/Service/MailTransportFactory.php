@@ -2,8 +2,8 @@
 /**
  * @Author: Daniel
  * @Date:   2016-04-01 13:00:56
- * @Last Modified by:   Daniel
- * @Last Modified time: 2016-04-01 13:10:38
+ * @Last Modified by:   Daniel Wolkenhauer
+ * @Last Modified time: 2019-08-06 22:59:37
  */
 
 namespace ZfMailer\Service;
