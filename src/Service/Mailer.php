@@ -1,13 +1,11 @@
 <?php
 /**
- * @Author: Daniel
- * @Date:   2016-03-31 19:13:13
- * @Last Modified by:   Daniel
- * @Last Modified time: 2016-04-01 18:28:26
- */
-
-/**
- * Todo: Kommentare
+ * ZfMailer
+ *
+ * @author     Daniel Wolkenhauer <hello@dw-labs.de>
+ * @copyright  Copyright (c) 1997-2019 Daniel Wolkenhauer
+ * @link       http://dw-labs.de/zfmailer
+ * @version    0.1.0
  */
 
 namespace ZfMailer\Service;
@@ -95,6 +93,11 @@ class Mailer
 
     return $mail;
 
+  }
+
+  public function createMailWithAttachment()
+  {
+    return 'Das ist eine Mail mit Anhang';
   }
 
   public function sendEmail()

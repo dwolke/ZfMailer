@@ -1,17 +1,11 @@
 <?php
 /**
- * Mailer-Module
+ * ZfMailer
  *
- * Foo bar Baz
- *
- * @author     Daniel Wolkenhauer <dw@dwolke.de>
- * @copyright  Copyright (c) 1997-2015 Daniel Wolkenhauer
- * @link       https://bitbucket.org/detema/oxid-artikelimporter
- * @version    0.0.1
- * 
- * @Date:   2016-03-31 16:37:50
- * @Last Modified by:   Daniel
- * @Last Modified time: 2016-03-31 17:58:52
+ * @author     Daniel Wolkenhauer <hello@dw-labs.de>
+ * @copyright  Copyright (c) 1997-2019 Daniel Wolkenhauer
+ * @link       http://dw-labs.de/zfmailer
+ * @version    0.1.0
  */
 
 namespace ZfMailer;
