@@ -1,0 +1,30 @@
+build_settings:
+    ignore:
+        - "tests"
+
+setup:
+    composer:
+        action: "install"
+
+test:
+    technical_debt:
+        allowed_errors: -1
+    php_docblock_checker:
+        allowed_warnings: -1
+    php_cpd:
+        allow_failures: true
+        path: "."
+        ignore:
+            - "config"
+    php_loc:
+        directory: "module"
+
+failure:
+    email:
+        committer: true
+        cc: ["dw@dwolke.de"]
+
+complete:
+    email:
+        committer: true
+        cc: ["dw@dwolke.de"]
