@@ -1,6 +1,7 @@
 build_settings:
     ignore:
         - "tests"
+        - "vendor"
 
 setup:
     composer:
@@ -17,7 +18,7 @@ test:
         ignore:
             - "config"
     php_loc:
-        directory: "module"
+        directory: "."
 
 failure:
     email:
