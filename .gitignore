@@ -3,4 +3,5 @@
 .DS_Store
 composer.lock
 phpunit.xml
+!tests/phpunit.xml
 /vendor
