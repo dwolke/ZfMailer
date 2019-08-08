@@ -1,9 +1,11 @@
 <?php
 /**
- * @Author: Daniel
- * @Date:   2016-03-31 19:48:49
- * @Last Modified by:   Daniel
- * @Last Modified time: 2016-03-31 19:59:25
+ * ZfMailer
+ *
+ * @author     Daniel Wolkenhauer <hello@dw-labs.de>
+ * @copyright  Copyright (c) 1997-2019 Daniel Wolkenhauer
+ * @link       http://dw-labs.de/zfmailer
+ * @version    0.1.0
  */
 
 namespace ZfMailer\View;
@@ -12,9 +14,21 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Renderer\PhpRenderer;
 
+/**
+* Renderer Factory
+* Initilisiert den Renderer
+* 
+* @package ZfMailer
+* @subpackage View
+*/
 class MailRendererFactory implements FactoryInterface
 {
 
+  /**
+   * Create Service Factory
+   *
+   * @param ServiceLocatorInterface $serviceLocator
+   */
   public function createService(ServiceLocatorInterface $serviceLocator)
   {
 

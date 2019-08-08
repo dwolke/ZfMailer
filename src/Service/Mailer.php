@@ -15,6 +15,13 @@ use Zend\Mime\Mime;
 use Zend\Mime\Part as MimePart;
 use Zend\View\Renderer\RendererInterface;
 
+/**
+* Mailer
+* Klasse für den Versand der E-Mails zuständig
+* 
+* @package ZfMailer
+* @subpackage Service
+*/
 class Mailer
 {
 

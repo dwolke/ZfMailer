@@ -12,8 +12,6 @@ test:
         allowed_errors: -1
     php_parallel_lint:
         directory: "src"
-    php_unit:
-        config: "tests/phpunit.xml"
     php_docblock_checker:
         allowed_warnings: -1
     php_cpd:
@@ -27,9 +25,9 @@ test:
 failure:
     email:
         committer: true
-        cc: ["dw@dwolke.de"]
+        cc: ["your@mail.com"]
 
 complete:
     email:
         committer: true
-        cc: ["dw@dwolke.de"]
+        cc: ["your@mail.com"]

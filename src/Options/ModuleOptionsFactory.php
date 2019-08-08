@@ -13,7 +13,12 @@ namespace ZfMailer\Options;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-
+/**
+* ModuleOptions Factory
+* 
+* @package ZfMailer
+* @subpackage Options
+*/
 class ModuleOptionsFactory implements FactoryInterface
 {
 

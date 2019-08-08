@@ -15,11 +15,16 @@ namespace ZfMailer;
  *
  * Simple Mailer for Zend Framework (Zend\Mail)
  *
- * @package Modul
+ * @package ZfMailer
  */
 class Module
 {
 
+  /**
+   * Return an array for passing to Zend\Loader\AutoloaderFactory.
+   *
+   * @return array
+   */
   public function getAutoloaderConfig()
   {
 
@@ -33,19 +38,14 @@ class Module
 
   }
 
+  /**
+   * Returns the module configuration to merge with application configuration
+   *
+   * @return array|\Traversable
+   */
   public function getConfig()
   {
     return include __DIR__ . '/config/module.config.php';
   }
-
-  // public function getServiceConfig()
-  // {
-  //   return include __DIR__ . '/config/service.config.php';
-  // }
-
-  // public function getControllerConfig()
-  // {
-  //   return include __DIR__ . '/config/controller.config.php';
-  // }
 
 }

@@ -1,21 +1,33 @@
 <?php
 /**
- * @Author: Daniel
- * @Date:   2016-03-31 19:15:56
- * @Last Modified by:   Daniel
- * @Last Modified time: 2016-04-01 13:09:29
+ * ZfMailer
+ *
+ * @author     Daniel Wolkenhauer <hello@dw-labs.de>
+ * @copyright  Copyright (c) 1997-2019 Daniel Wolkenhauer
+ * @link       http://dw-labs.de/zfmailer
+ * @version    0.1.0
  */
-
 
 namespace ZfMailer\Service;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-
+/**
+* Mailer Factory
+* Initilisiert den Mailer
+* 
+* @package ZfMailer
+* @subpackage Service
+*/
 class MailerFactory implements FactoryInterface
 {
 
+  /**
+   * Create Service Factory
+   *
+   * @param ServiceLocatorInterface $serviceLocator
+   */
   public function createService(ServiceLocatorInterface $serviceLocator)
   {
 
