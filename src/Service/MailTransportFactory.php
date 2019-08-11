@@ -34,7 +34,7 @@ class MailTransportFactory implements FactoryInterface
   public function createService(ServiceLocatorInterface $serviceLocator)
   {
 
-    $config  = $serviceLocator->get('config');
+    $config = $serviceLocator->get('config');
 
     if ($config instanceof Traversable) {
       $config = ArrayUtils::iteratorToArray($config);
