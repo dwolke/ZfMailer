@@ -87,9 +87,9 @@ jobs:
       - run:
           name: Tests ausführen (PHPunit)
           command: |
-            ./vendor/bin/phpunit --coverage-clover=coverage.xml
+            ./vendor/bin/phpunit -c tests/phpunit.xml --coverage-clover=coverage.xml
 
-      # - run:
-      #     name: Upload PHPunit results to codecov
-      #     command: |
-      #       bash <(curl -s https://codecov.io/bash) -t bf6f54fa-470c-4c89-a814-ab3537887ad5
+      - run:
+          name: Upload PHPunit results to codecov
+          command: |
+            bash <(curl -s https://codecov.io/bash) -t 0c8021ca-d8a0-4b66-84b1-bd6cf7f43868
