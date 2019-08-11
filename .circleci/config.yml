@@ -34,13 +34,13 @@ jobs:
       #      sudo apt-get install mysql-client
       #      sudo apt-get -y install mysql-server
 
-      - run:
-          name: PHP Erweiterungen installieren
-          command: |
-            sudo docker-php-ext-install zip
-            sudo docker-php-ext-configure intl
-            sudo docker-php-ext-install intl
-            sudo docker-php-ext-install pdo_mysql
+      # - run:
+      #     name: PHP Erweiterungen installieren
+      #     command: |
+      #       sudo docker-php-ext-install zip
+      #       sudo docker-php-ext-configure intl
+      #       sudo docker-php-ext-install intl
+      #       sudo docker-php-ext-install pdo_mysql
 
       - run:
           working_directory: ~/dwolke/zf-mailer

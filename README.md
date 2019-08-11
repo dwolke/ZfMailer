@@ -1,7 +1,7 @@
 # ZfMailer
 > Simple Mailer for the Zend Framework
 
-[![Latest Version on Bitbucket][icon-stable]][link-stable] [![Latest Unstable Version][icon-unstable]][link-unstable] [![License][icon-license]][link-license] [![Build Status][icon-phpci]][link-phpci]
+[![Latest Version on Bitbucket][icon-stable]][link-stable] [![Latest Unstable Version][icon-unstable]][link-unstable] [![License][icon-license]][link-license] [![Build Status][icon-phpci]][link-phpci] [![CircleCI][icon-circleci2]][link-circleci] [![codecov][icon-codecov]][link-codecov]
 
 **WARNING:** This module is currently under  heavy development and is not intended for use in productive environment.
 
@@ -46,9 +46,14 @@ Copyright © 2012 - 2019 by dwLabs. Alle Rechte vorbehalten. 😎
 [icon-stable]: https://poser.pugx.org/dwolke/zf-mailer/v/stable
 [icon-unstable]: https://poser.pugx.org/dwolke/zf-mailer/v/unstable
 [icon-license]: https://poser.pugx.org/dwolke/zf-mailer/license
-[icon-phpci]: https://ci.dw-labs.de/build-status/image/2?label=Build
+[icon-phpci]: https://ci.dw-labs.de/build-status/image/2?label=Build%201
+[icon-circleci]: https://circleci.com/gh/dwolke/ZfMailer/tree/develop.svg?style=svg
+[icon-circleci2]: https://img.shields.io/circleci/build/gh/dwolke/ZfMailer?label=Build%202
+[icon-codecov]: https://codecov.io/gh/dwolke/ZfMailer/branch/develop/graph/badge.svg
 
 [link-stable]: https://packagist.org/packages/dwolke/zf-mailer
 [link-unstable]: https://packagist.org/packages/dwolke/zf-mailer
 [link-license]: https://packagist.org/packages/dwolke/zf-mailer
 [link-phpci]: https://ci.dw-labs.de/build-status/view/2
+[link-circleci]: https://circleci.com/gh/dwolke/ZfMailer/tree/develop
+[link-codecov]: https://codecov.io/gh/dwolke/ZfMailer
