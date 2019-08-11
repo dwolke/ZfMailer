@@ -20,11 +20,8 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "ZfMailer": "src/"
-        },
-        "classmap": [
-            "./Module.php"
-        ]
+        "psr-4": {
+            "ZfMailer\\": "src/"
+        }
     }
 }
