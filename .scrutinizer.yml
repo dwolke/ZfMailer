@@ -1,16 +1,12 @@
 build:
   environment:
-    php: 7.1.12
-  nodes:
-    analysis:
-      image: default-bionic
-      project_setup:
-        override:
-          - 'true'
-      tests:
-        override:
-          - php-scrutinizer-run
-          -
-            command: phpcs-run
-            use_website_config: true
-    tests: true
+    php:
+      version: 7.3.7
+  tests:
+    override:
+      -
+        command: 'vendor/bin/phpunit --coverage-clover=coverage.xml'
+        coverage:
+          file: 'coverage.xml'
+          format: 'clover'
+
