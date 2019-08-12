@@ -3,6 +3,7 @@ build:
     php: 7.1.12
   nodes:
     analysis:
+      image: default-bionic
       project_setup:
         override:
           - 'true'
