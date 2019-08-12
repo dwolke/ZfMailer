@@ -15,3 +15,8 @@ build:
         coverage:
           file: 'coverage.xml'
           format: 'clover'
+      - php-scrutinizer-run
+      -
+        command: phpcs-run
+        title: "Code-Sniffer"
+        use_website_config: true
