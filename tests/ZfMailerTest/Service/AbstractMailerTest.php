@@ -9,6 +9,11 @@ use Zend\Mail\Message as Message;
 use Zend\View\Renderer\PhpRenderer as Renderer;
 use Zend\Mail\Transport as Transport;
 
+/**
+ * Test for {@see \ZfMailer\Service\AbstractMailer}
+ *
+ * @author Daniel Wolkenhauer <hello@dw-labs.de>
+ */
 class AbstractMailerTest extends TestCase
 {
 

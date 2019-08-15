@@ -28,15 +28,44 @@ class Mailer extends AbstractMailer
   /**
    * Neue Nachricht
    *
-   * @param string $from Absender der Nachricht
    * @param string $to Empfänger der Nachricht
    * @param string $subject Betreff der Nachricht
+   * @param string $from Absender der Nachricht
    * @return Zend\Mail\Message Mail
    */
-  public function createNewMail($from = null, $to = null, $subject = null)
+  public function createNewMail($to, $subject, $from = null)
   {
 
+    // prüfen, ob Absender vorhanden ist
+    if (!isset($from) || empty($from)) {
+
+      $from = $this->getOptions()->getDefaultFrom();
+
+      if (!isset($from) || empty($from)) {
+        $this->setErrorMessage('Es wurde kein Absender angegeben oder konfiguriert.');
+        return false;
+      }
+
+      $from = $this->getOptions()->getDefaultFrom();
+
+    }
+
+    // Empfänger prüfen
+    if (!isset($to) || empty($to)) {
+      $this->setErrorMessage('Es wurde kein Empfänger angegeben.');
+      return false;
+    }
+
+    // Betreff prüfen
+    if (!isset($subject) || empty($subject)) {
+      $this->setErrorMessage('Es wurde kein Betreff angegeben.');
+      return false;
+    }
+
     $message = $this->getMailMessage();
+    $message->setFrom($from);
+    $message->setTo($to);
+    $message->setSubject($subject);
 
     return $message;
 
