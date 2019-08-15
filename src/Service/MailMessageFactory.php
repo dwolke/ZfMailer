@@ -33,7 +33,6 @@ class MailMessageFactory implements FactoryInterface
    */
   public function createService(ServiceLocatorInterface $serviceLocator)
   {
-
     
     $options = $serviceLocator->get('ZfMailerOptions');
     $defaultEncoding = $options->getEncoding();

@@ -30,8 +30,8 @@ class Mailer extends AbstractMailer
    *
    * @param string $to Empfänger der Nachricht
    * @param string $subject Betreff der Nachricht
-   * @param string $from Absender der Nachricht
-   * @return Zend\Mail\Message Mail
+   * @param string|null $from Absender der Nachricht
+   * @return \Zend\Mail\Message|boolean Mail
    */
   public function createNewMail($to, $subject, $from = null)
   {
@@ -143,11 +143,10 @@ class Mailer extends AbstractMailer
 
   }
 
-  public function createMailWithAttachment()
-  {
-    return 'Das ist eine Mail mit Anhang';
-  }
-
+  /**
+   * Versendet die E-Mails
+   * @return Boolean Gibt True zurück, wenn die E-Mail erfolgreich versendet wurde, sonst False
+   */
   public function sendEmail()
   {
 
