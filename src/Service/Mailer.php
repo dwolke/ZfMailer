@@ -13,7 +13,7 @@ namespace ZfMailer\Service;
 use Zend\Mime\Message as MimeMessage;
 use Zend\Mime\Mime;
 use Zend\Mime\Part as MimePart;
-use Zend\View\Renderer\RendererInterface;
+
 
 /**
 * Mailer
@@ -22,13 +22,25 @@ use Zend\View\Renderer\RendererInterface;
 * @package ZfMailer
 * @subpackage Service
 */
-class Mailer
+class Mailer extends AbstractMailer
 {
 
-  protected $errorMessage = null;
-  protected $renderer = null;
-  protected $mailMessage = null;
-  protected $transport = null;
+  /**
+   * Neue Nachricht
+   *
+   * @param string $from Absender der Nachricht
+   * @param string $to Empfänger der Nachricht
+   * @param string $subject Betreff der Nachricht
+   * @return Zend\Mail\Message Mail
+   */
+  public function createNewMail($from = null, $to = null, $subject = null)
+  {
+
+    $message = $this->getMailMessage();
+
+    return $message;
+
+  }
   
   private function getDefaultMessage($to, $subject, $body, $from = null)
   {
@@ -121,48 +133,6 @@ class Mailer
     
   }
 
-  public function setRenderer(RendererInterface $renderer)
-  {
-    $this->renderer = $renderer;
-    return $this;
-  }
-
-  public function getRenderer()
-  {
-    return $this->renderer;
-  }
-
-  public function setMailMessage($mailMessage)
-  {
-    $this->mailMessage = $mailMessage;
-    return $this;
-  }
-
-  public function getMailMessage()
-  {
-    return $this->mailMessage;
-  }
-
-  public function setTransport($transport)
-  {
-    $this->transport = $transport;
-    return $this;
-  }
-
-  public function getTransport()
-  {
-    return $this->transport;
-  }
-
-  public function setErrorMessage($errorMessage)
-  {
-    $this->errorMessage = $errorMessage;
-    return $this;
-  }
-
-  public function getErrorMessage()
-  {
-    return $this->errorMessage;
-  }
+  
 
 }
