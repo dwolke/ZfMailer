@@ -26,6 +26,16 @@ class Mailer extends AbstractMailer
 {
 
   /**
+   * @var string Template für Text E-Mails
+   */
+  private $textTemplate = 'mail/default-text';
+
+  /**
+   * @var string|null Template für HTML E-Mails
+   */
+  private $htmlTemplate = null;
+
+  /**
    * Neue Nachricht
    *
    * @param string $to Empfänger der Nachricht
@@ -70,37 +80,38 @@ class Mailer extends AbstractMailer
     return $message;
 
   }
-  
-  private function getDefaultMessage($to, $subject, $body, $from = null)
+
+  /**
+   * Erstellt den Body der E-Mail, fügt Variablen hinzu und rendert den Inhalt
+   * @param array $mailContent  Inhaltsvaiablen
+   * @param string|null $templateText Template für Text E-Mails (optional)
+   * @param string|null $templateHtml Template für HTML (Multipart) E-Mails (optional)
+   */
+  public function setContent($mailContent, $templateText = null, $templateHtml = null)
   {
 
-    if (!isset($body) || empty($body)) {
-      return false;
-    }
-
-    if (!isset($to) || empty($to)) {
-      return false;
-    }
-
     $message = $this->getMailMessage();
-    $message->setSubject($subject)
-            ->setBody($body)
-            ->setTo($to);
 
-    if (isset($from)) {
-      $message->setFrom($from);
+    if (isset($templateText) || !empty($templateText)) {
+      $this->textTemplate = $templateText;
     }
 
-    // if (isset($encoding)) {
-    //   $message->setEncoding($encoding);
-    // }
+    if (isset($templateHtml) || !empty($templateHtml)) {
+      $this->htmlTemplate = $templateHtml;
+    }
 
-    // Todo: in Factory verschieben und aus config auslesen
-    $message->getHeaders()->addHeaders(array('X-Mailer' => 'ZfMailer 1.0.1'));
+    // var_dump($this->textTemplate, $this->htmlTemplate);
+    
+    $renderer = $this->getRenderer();
+    $body = $renderer->render($this->textTemplate, $mailContent);
 
-    return $message;
+    $message->setBody($body);
+
+
 
   }
+  
+  
 
   public function createTextMail($to, $subject, $templateOrModel, $values = array(), $from, $encoding = 'UTF-8')
   {
@@ -140,6 +151,37 @@ class Mailer extends AbstractMailer
     $mail->setEncoding($encoding);
 
     return $mail;
+
+  }
+
+  private function getDefaultMessage($to, $subject, $body, $from = null)
+  {
+
+    if (!isset($body) || empty($body)) {
+      return false;
+    }
+
+    if (!isset($to) || empty($to)) {
+      return false;
+    }
+
+    $message = $this->getMailMessage();
+    $message->setSubject($subject)
+            ->setBody($body)
+            ->setTo($to);
+
+    if (isset($from)) {
+      $message->setFrom($from);
+    }
+
+    // if (isset($encoding)) {
+    //   $message->setEncoding($encoding);
+    // }
+
+    // in Factory verschieben und aus config auslesen
+    $message->getHeaders()->addHeaders(array('X-Mailer' => 'ZfMailer 1.0.1'));
+
+    return $message;
 
   }
 
