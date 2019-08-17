@@ -38,6 +38,7 @@ class Mailer extends AbstractMailer
   /**
    * Neue Nachricht
    *
+   * @todo #ZFMAIL-2 weiter Header einfügen: X-Mailer, Org, usw.
    * @param string $to Empfänger der Nachricht
    * @param string $subject Betreff der Nachricht
    * @param string|null $from Absender der Nachricht
@@ -82,53 +83,45 @@ class Mailer extends AbstractMailer
   }
 
   /**
-   * Erstellt den Body der E-Mail, fügt Variablen hinzu und rendert den Inhalt
-   * @param array $mailContent  Inhaltsvaiablen
-   * @param string|null $templateText Template für Text E-Mails (optional)
-   * @param string|null $templateHtml Template für HTML (Multipart) E-Mails (optional)
+   * Bereitet die E-Mail vor, fügt die Content-Variablen ein, rendert das Template
+   * und gibt ein fertiges Zend\Mail\Message Objekt zurück
+   * 
+   * @todo #ZFMAIL-3 Datentyp von $contentValues prüfen, falls kein Array, Fehler
+   * @param array $contentValues Array mit Werten, die in deie E-Mail eingefügt werden
+   * @param string|null $textTemplate Template für eine E-Mail im Textformat
+   * @return \Zend\Mail\Message|boolean fertiges Mail-Objekt
    */
-  public function setContent($mailContent, $templateText = null, $templateHtml = null)
+  public function prepareAsText(array $contentValues, string $textTemplate = null)
   {
 
     $message = $this->getMailMessage();
 
-    if (isset($templateText) || !empty($templateText)) {
-      $this->textTemplate = $templateText;
+    if (isset($textTemplate) || !empty($textTemplate)) {
+      $this->textTemplate = $textTemplate;
     }
 
-    if (isset($templateHtml) || !empty($templateHtml)) {
-      $this->htmlTemplate = $templateHtml;
-    }
-
-    // var_dump($this->textTemplate, $this->htmlTemplate);
-    
     $renderer = $this->getRenderer();
-    $body = $renderer->render($this->textTemplate, $mailContent);
-
+    $body = $renderer->render($this->textTemplate, $contentValues);
     $message->setBody($body);
-
-
-
-  }
-  
-  
-
-  public function createTextMail($to, $subject, $templateOrModel, $values = array(), $from, $encoding = 'UTF-8')
-  {
-    $renderer = $this->getRenderer();
-    $body = $renderer->render($templateOrModel, $values);
-
-    $mail = $this->getDefaultMessage($to, $subject, $body, $from);
-    $mail->setEncoding($encoding);
     
-    return $mail;
+  }
+
+  /**
+   * Bereitet die E-Mail vor, fügt die Content-Variablen ein, rendert die Templates
+   * fügt die Teile für Text- und HTML-Inhalte zusammen und gibt ein fertiges
+   * Zend\Mail\Message Objekt zurück
+   * 
+   * @param array $contentValues Array mit Werten, die in die E-Mail eingefügt werden
+   * @param string|null $textTemplate Template für den Text-Teil der E-Mail
+   * @param string|null $htmlTemplate Template für den HTML-Teil der E-Mail
+   */
+  public function prepareAsMultipart(array $contentValues, string $textTemplate = null, string $htmlTemplate = null)
+  {
+    # code ...
   }
 
   public function createMultiPartMail($to, $subject, $txtTemplate, $htmlTemplate, $contentValues = array(), $from = null, $encoding = 'UTF-8')
   {
-
-    // Todo: siehe https://github.com/zendframework/zf2/issues/4917
-    // Todo: Variablen prüfen
 
     $renderer = $this->getRenderer();
 
@@ -173,10 +166,6 @@ class Mailer extends AbstractMailer
     if (isset($from)) {
       $message->setFrom($from);
     }
-
-    // if (isset($encoding)) {
-    //   $message->setEncoding($encoding);
-    // }
 
     // in Factory verschieben und aus config auslesen
     $message->getHeaders()->addHeaders(array('X-Mailer' => 'ZfMailer 1.0.1'));
