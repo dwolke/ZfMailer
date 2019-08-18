@@ -31,9 +31,9 @@ class Mailer extends AbstractMailer
   private $textTemplate = 'mail/default-text';
 
   /**
-   * @var string|null Template für HTML E-Mails
+   * @var string Template für HTML E-Mails
    */
-  private $htmlTemplate = null;
+  private $htmlTemplate = 'mail/default-html';
 
   /**
    * Neue Nachricht
@@ -117,35 +117,40 @@ class Mailer extends AbstractMailer
    */
   public function prepareAsMultipart(array $contentValues, string $textTemplate = null, string $htmlTemplate = null)
   {
-    # code ...
-  }
 
-  public function createMultiPartMail($to, $subject, $txtTemplate, $htmlTemplate, $contentValues = array(), $from = null, $encoding = 'UTF-8')
-  {
-
+    $message = $this->getMailMessage();
     $renderer = $this->getRenderer();
 
-    $txtContent = $renderer->render($txtTemplate, $contentValues);
-    $htmlContent = $renderer->render($htmlTemplate, $contentValues);
+    if (isset($textTemplate) || !empty($textTemplate)) {
+      $this->textTemplate = $textTemplate;
+    }
 
-    $text = new MimePart($txtContent);
-    $text->type = "text/plain";
-    $text->charset = 'utf-8';
+    if (isset($htmlTemplate) || !empty($htmlTemplate)) {
+      $this->htmlTemplate = $htmlTemplate;
+    }
 
-    $html = new MimePart($htmlContent);
-    $html->type = "text/html";
-    $html->charset = 'utf-8';
+    $textContent = $renderer->render($this->textTemplate, $contentValues);
+    $htmlContent = $renderer->render($this->htmlTemplate, $contentValues);
 
-    $body = new MimeMessage();
-    $body->setParts(array($text, $html));
+    $textPart = new MimePart($textContent);
+    $textPart->type = Mime::TYPE_TEXT;
+    $textPart->charset = 'utf-8';
+    $textPart->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
 
-    $mail = $this->getDefaultMessage($to, $subject, $body, $from);
-    $mail->getHeaders()->get('content-type')->setType('multipart/alternative');
-    $mail->setEncoding($encoding);
+    $htmlPart = new MimePart($htmlContent);
+    $htmlPart->type = Mime::TYPE_HTML;
+    $htmlPart->charset = 'utf-8';
+    $htmlPart->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
 
-    return $mail;
+    $mailBody = new MimeMessage();
+    $mailBody->setParts([$textPart, $htmlPart]);
 
+    $message->setBody($mailBody);
+    $message->getHeaders()->get('content-type')->setType('multipart/alternative');
+    
   }
+
+  
 
   private function getDefaultMessage($to, $subject, $body, $from = null)
   {

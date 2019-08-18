@@ -40,18 +40,26 @@ class MailerTest extends TestCase
 
     $smtp = new Transport\SmtpOptions($smtpOptions);
 
+    $rendererMock = $this->getMockBuilder('Zend\View\Renderer\PhpRenderer')->getMock();
+    $rendererMock->expects($this->any())
+            ->method('render')
+            ->will($this->returnValue('Content'));
+
     $this->message = new Message();
-    $this->renderer = new Renderer();
+    //$this->renderer = new Renderer();
     $this->transport = new Transport\Smtp($smtp);
     $this->options = new Options();
 
     $this->service = new Mailer();
     $this->service->setMailMessage($this->message);
-    $this->service->setRenderer($this->renderer);
+    // $this->service->setRenderer($this->renderer);
+    $this->service->setRenderer($rendererMock);
     $this->service->setTransport($this->transport);
     $this->service->setOptions($this->options);
 
     $this->options->setDefaultFrom('default@mailer.com');
+
+    //var_dump($rendererMock);
 
   }
 
@@ -91,6 +99,56 @@ class MailerTest extends TestCase
     $this->assertInstanceOf('Zend\Mail\Message', $testMail);
     $this->assertTrue($testMail->isValid());
 
+  }
+
+  /**
+   * @covers ZfMailer\Service\Mailer::prepareAsText
+   */
+  public function testPreapareAsText()
+  {
+
+    $testMailer = $this->service;
+
+    $from = 'sender@mailer.com';
+    $to = 'recipient@mailer.com';
+    $subject = 'Testing Mailer';
+
+    $mailContent = array(
+      'Foo' => 'Foo',
+      'Bar' => 'Bar',
+      'Baz' => 'Baz'
+    );
+
+    $testMail = $testMailer->createNewMail($to, $subject);
+    $testMailer->prepareAsText($mailContent, 'Content');
+    $this->assertInstanceOf('Zend\Mail\Message', $testMail);
+    $this->assertTrue($testMail->isValid());
+    
+  }
+
+  /**
+   * @covers ZfMailer\Service\Mailer::prepareAsMultipart
+   */
+  public function testprepareAsMultipart()
+  {
+
+    $testMailer = $this->service;
+
+    $from = 'sender@mailer.com';
+    $to = 'recipient@mailer.com';
+    $subject = 'Testing Mailer';
+
+    $mailContent = array(
+      'Foo' => 'Foo',
+      'Bar' => 'Bar',
+      'Baz' => 'Baz'
+    );
+
+    $testMail = $testMailer->createNewMail($to, $subject);
+    $testMailer->prepareAsMultipart($mailContent, 'Text', 'HTML');
+    $this->assertInstanceOf('Zend\Mail\Message', $testMail);
+    $this->assertTrue($testMail->isValid());
+    
   }
 
   /**
