@@ -38,7 +38,6 @@ class Mailer extends AbstractMailer
   /**
    * Neue Nachricht
    *
-   * @todo #ZFMAIL-2 weiter Header einfügen: X-Mailer, Org, usw.
    * @param string $to Empfänger der Nachricht
    * @param string $subject Betreff der Nachricht
    * @param string|null $from Absender der Nachricht
@@ -170,10 +169,6 @@ class Mailer extends AbstractMailer
 
     $message->setBody($mailBody);
     $message->getHeaders()->get('content-type')->setType('multipart/alternative');
-
-    if (isset($defaultEncoding) && !empty($defaultEncoding)) {
-      $message->setEncoding($defaultEncoding);
-    }
     
   }
 
