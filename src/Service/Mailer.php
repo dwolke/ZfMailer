@@ -57,6 +57,7 @@ class Mailer extends AbstractMailer
         return false;
       }
 
+      // ToDo: prüfen, ob das hier nötig ist!
       $from = $this->getOptions()->getDefaultFrom();
 
     }
@@ -77,6 +78,27 @@ class Mailer extends AbstractMailer
     $message->setFrom($from);
     $message->setTo($to);
     $message->setSubject($subject);
+
+    $xMailer = $this->getOptions()->getXMailer();
+    $organization = $this->getOptions()->getOrganization();
+    $returnPath = $this->getOptions()->getReturnPath();
+    $replyTo = $this->getOptions()->getReplyTo();
+
+    if (isset($xMailer) && !empty($xMailer)) {
+      $message->getHeaders()->addHeaders(array('X-Mailer' => $xMailer));
+    }
+
+    if (isset($organization) && !empty($organization)) {
+      $message->getHeaders()->addHeaders(array('Organization' => $organization));
+    }
+
+    if (isset($returnPath) && !empty($returnPath)) {
+      $message->getHeaders()->addHeaders(array('Return-Path' => $returnPath));
+    }
+
+    if (isset($replyTo) && !empty($replyTo)) {
+      $message->getHeaders()->addHeaders(array('Reply-To' => $replyTo));
+    }
 
     return $message;
 
@@ -117,6 +139,7 @@ class Mailer extends AbstractMailer
    */
   public function prepareAsMultipart(array $contentValues, string $textTemplate = null, string $htmlTemplate = null)
   {
+    $defaultEncoding = $this->getOptions()->getEncoding();
 
     $message = $this->getMailMessage();
     $renderer = $this->getRenderer();
@@ -134,12 +157,12 @@ class Mailer extends AbstractMailer
 
     $textPart = new MimePart($textContent);
     $textPart->type = Mime::TYPE_TEXT;
-    $textPart->charset = 'utf-8';
+    $textPart->charset = $defaultEncoding;
     $textPart->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
 
     $htmlPart = new MimePart($htmlContent);
     $htmlPart->type = Mime::TYPE_HTML;
-    $htmlPart->charset = 'utf-8';
+    $htmlPart->charset = $defaultEncoding;
     $htmlPart->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
 
     $mailBody = new MimeMessage();
@@ -147,36 +170,11 @@ class Mailer extends AbstractMailer
 
     $message->setBody($mailBody);
     $message->getHeaders()->get('content-type')->setType('multipart/alternative');
+
+    if (isset($defaultEncoding) && !empty($defaultEncoding)) {
+      $message->setEncoding($defaultEncoding);
+    }
     
-  }
-
-  
-
-  private function getDefaultMessage($to, $subject, $body, $from = null)
-  {
-
-    if (!isset($body) || empty($body)) {
-      return false;
-    }
-
-    if (!isset($to) || empty($to)) {
-      return false;
-    }
-
-    $message = $this->getMailMessage();
-    $message->setSubject($subject)
-            ->setBody($body)
-            ->setTo($to);
-
-    if (isset($from)) {
-      $message->setFrom($from);
-    }
-
-    // in Factory verschieben und aus config auslesen
-    $message->getHeaders()->addHeaders(array('X-Mailer' => 'ZfMailer 1.0.1'));
-
-    return $message;
-
   }
 
   /**
@@ -196,7 +194,5 @@ class Mailer extends AbstractMailer
     }
     
   }
-
-  
 
 }
