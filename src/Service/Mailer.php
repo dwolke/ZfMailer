@@ -46,7 +46,6 @@ class Mailer extends AbstractMailer
   public function createNewMail($to, $subject, $from = null)
   {
 
-    // prüfen, ob Absender vorhanden ist
     if (!isset($from) || empty($from)) {
 
       $from = $this->getOptions()->getDefaultFrom();
@@ -58,13 +57,11 @@ class Mailer extends AbstractMailer
 
     }
 
-    // Empfänger prüfen
     if (!isset($to) || empty($to)) {
       $this->setErrorMessage('Es wurde kein Empfänger angegeben.');
       return false;
     }
 
-    // Betreff prüfen
     if (!isset($subject) || empty($subject)) {
       $this->setErrorMessage('Es wurde kein Betreff angegeben.');
       return false;
