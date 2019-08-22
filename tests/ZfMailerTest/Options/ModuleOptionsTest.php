@@ -153,7 +153,7 @@ class ModuleOptionsTest extends TestCase
 	 */
 	public function testGetXMailer()
 	{
-		$this->assertEquals('ZfMailer 1.0.1', $this->options->getXMailer());
+		$this->assertEquals('ZfMailer 0.1.0', $this->options->getXMailer());
 	}
 
 	/**
