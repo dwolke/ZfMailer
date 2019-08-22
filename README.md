@@ -9,6 +9,8 @@
 
 ZfMailer is a simple e-mail module for Zend Framework based on *Zend\Mail*. E-mails can be sent in text format or as MIME-compliant "multi-part" mails. Sending e-mails with attachments is also supported.
 
+Currently, only sending e-mails by SMTP is supported. Maybe this module will be extended later with further possibilities.
+
 ## Installation
 
 ### Main Setup
@@ -21,7 +23,7 @@ ZfMailer is a simple e-mail module for Zend Framework based on *Zend\Mail*. E-ma
 }
 ```
 
-2. Now tell composer to download GoalioMailService by running the command:
+2. Now tell composer to download ZfMailer by running the command:
 
 ```bash
 $ php composer.phar update
@@ -29,14 +31,47 @@ $ php composer.phar update
 
 ### Post Installation
 
-TBD
+After installation with composer, add the module to your application.config.php.
 
-## Usage
+```php
+<?php
 
-TBD
+return array(
+  'modules' => array(
+    // ...
+    'ZfMailer',
+    // ...
+  ),
+  // ...
+);
+```
+
 
 
 ## Settings
+
+Copy the configuration file from `vendor/dwolke/zf-mailer/config/zfmailer.local.php.dist` to `config/autoload/zfmailer.local.php` and change the values as desired.
+
+### Options
+
+The following options are available
+
+| Setting                           | Description                                                 |
+| ------------------------------------- | ------------------------------------------------------------ |
+| **smart_host**        | Name... |
+| **encoding**             | Typ: |
+| **return_path** | Typ: |
+| **reply_to**       | Typ: |
+| **x_mailer**       | Typ: |
+| **organization** | Typ: |
+| **use_registration_form_captcha**     | Typ: |
+
+
+
+
+
+
+
 
 TBD
 
