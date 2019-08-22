@@ -39,7 +39,7 @@ class MailMessageFactory implements FactoryInterface
 
     $mailMessage = new Message();
 
-    // ToDo: prüfen, wie Encoding richtig gesetzt werden kann (Sonderzeichen im Header)
+    // TODO: prüfen, wie Encoding richtig gesetzt werden kann (Sonderzeichen im Header)
     // if (isset($defaultEncoding)) {
     //   $mailMessage->setEncoding($defaultEncoding);
     // }

@@ -56,9 +56,6 @@ class Mailer extends AbstractMailer
         return false;
       }
 
-      // ToDo: prüfen, ob das hier nötig ist!
-      $from = $this->getOptions()->getDefaultFrom();
-
     }
 
     // Empfänger prüfen
@@ -78,27 +75,6 @@ class Mailer extends AbstractMailer
     $message->setTo($to);
     $message->setSubject($subject);
 
-    $xMailer = $this->getOptions()->getXMailer();
-    $organization = $this->getOptions()->getOrganization();
-    $returnPath = $this->getOptions()->getReturnPath();
-    $replyTo = $this->getOptions()->getReplyTo();
-
-    if (isset($xMailer) && !empty($xMailer)) {
-      $message->getHeaders()->addHeaders(array('X-Mailer' => $xMailer));
-    }
-
-    if (isset($organization) && !empty($organization)) {
-      $message->getHeaders()->addHeaders(array('Organization' => $organization));
-    }
-
-    if (isset($returnPath) && !empty($returnPath)) {
-      $message->getHeaders()->addHeaders(array('Return-Path' => $returnPath));
-    }
-
-    if (isset($replyTo) && !empty($replyTo)) {
-      $message->getHeaders()->addHeaders(array('Reply-To' => $replyTo));
-    }
-
     return $message;
 
   }
@@ -107,7 +83,6 @@ class Mailer extends AbstractMailer
    * Bereitet die E-Mail vor, fügt die Content-Variablen ein, rendert das Template
    * und gibt ein fertiges Zend\Mail\Message Objekt zurück
    * 
-   * @todo #ZFMAIL-3 Datentyp von $contentValues prüfen, falls kein Array, Fehler
    * @param array $contentValues Array mit Werten, die in deie E-Mail eingefügt werden
    * @param string|null $textTemplate Template für eine E-Mail im Textformat
    * @return \Zend\Mail\Message|boolean fertiges Mail-Objekt
@@ -179,11 +154,33 @@ class Mailer extends AbstractMailer
   public function sendEmail()
   {
 
+    $message = $this->getMailMessage();
+
+    $xMailer = $this->getOptions()->getXMailer();
+    $organization = $this->getOptions()->getOrganization();
+    $returnPath = $this->getOptions()->getReturnPath();
+    $replyTo = $this->getOptions()->getReplyTo();
+
+    if (isset($xMailer) && !empty($xMailer)) {
+      $message->getHeaders()->addHeaders(array('X-Mailer' => $xMailer));
+    }
+
+    if (isset($organization) && !empty($organization)) {
+      $message->getHeaders()->addHeaders(array('Organization' => $organization));
+    }
+
+    if (isset($returnPath) && !empty($returnPath)) {
+      $message->getHeaders()->addHeaders(array('Return-Path' => $returnPath));
+    }
+
+    if (isset($replyTo) && !empty($replyTo)) {
+      $message->getHeaders()->addHeaders(array('Reply-To' => $replyTo));
+    }
+
     try {
-      $this->getTransport()->send($this->getMailMessage());
+      $this->getTransport()->send($message);
       return true;
     } catch (RuntimeException $e) {
-      //echo 'Exception abgefangen: ',  $e->getMessage(), "\n";
       $this->setErrorMessage($e->getMessage());
       return false;
     }
