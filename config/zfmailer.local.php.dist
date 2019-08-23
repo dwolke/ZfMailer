@@ -23,7 +23,7 @@ $settings = array(
    **/
   'smart_host' => array(
     'server_name' => 'servername',
-    'server_port' => '25',
+    'server_port' => 'port',
     'username' => 'username',
     'password' => 'password'
   ),
@@ -36,7 +36,7 @@ $settings = array(
    * Erwartet: String
    * Standard: UTF-8
    **/
-  //'encoding' => 'UTF-8',
+  // 'encoding' => 'UTF-8',
 
   /**
    * Default From
@@ -46,7 +46,7 @@ $settings = array(
    * Erwartet: String
    * Standard: leer
    **/
-  //'default_from' => 'noreply@your-mail.com',
+  // 'default_from' => '',
 
   /**
    * Return Path (optional)
@@ -56,7 +56,7 @@ $settings = array(
    * Erwartet: String
    * Standard: leer
    */
-  //'return_path' => 'bounces@your-mail.com',
+  //'return_path' => '',
 
   /**
    * Reply To (optional)
@@ -66,7 +66,7 @@ $settings = array(
    * Erwartet: String
    * Standard: leer
    */
-  //'reply_to' => 'support@your-mail.com',
+  //'reply_to' => '',
 
   /**
    * X-Mailer (optional)
@@ -75,9 +75,9 @@ $settings = array(
    * Wenn keine Kennung mitgeschickt werden soll, hier einen Leer-String setzen
    *
    * Erwartet: String
-   * Standard: ZfMailer 1.0.1
+   * Standard: ZfMailer 0.1.0
    */
-  //'x_mailer' => 'Name of your app',
+  // 'x_mailer' => '',
 
   /**
    * Organization (optional)
@@ -87,7 +87,7 @@ $settings = array(
    * Erwartet: String
    * Standard: leer
    */
-  //'organization' => '',
+  // 'organization' => '',
 
 );
 

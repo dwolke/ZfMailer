@@ -1,4 +1,12 @@
 <?php
+/**
+ * Tests
+ *
+ * @author     Daniel Wolkenhauer <hello@dw-labs.de>
+ * @copyright  Copyright (c) 1997-2019 Daniel Wolkenhauer
+ * @link       http://dw-labs.de/zfmailer
+ * @version    0.1.0
+ */
 
 namespace ZfMailerTest\Service;
 
@@ -46,20 +54,16 @@ class MailerTest extends TestCase
             ->will($this->returnValue('Content'));
 
     $this->message = new Message();
-    //$this->renderer = new Renderer();
     $this->transport = new Transport\Smtp($smtp);
     $this->options = new Options();
 
     $this->service = new Mailer();
     $this->service->setMailMessage($this->message);
-    // $this->service->setRenderer($this->renderer);
     $this->service->setRenderer($rendererMock);
     $this->service->setTransport($this->transport);
     $this->service->setOptions($this->options);
 
     $this->options->setDefaultFrom('default@mailer.com');
-
-    //var_dump($rendererMock);
 
   }
 
@@ -71,7 +75,6 @@ class MailerTest extends TestCase
 
     $testMailer = $this->service;
 
-    //$this->assertInstanceOf('ZfMailer\Options\ModuleOptions', $this->mailer->getOptions());
     $from = 'sender@mailer.com';
     $to = 'recipient@mailer.com';
     $subject = 'Testing Mailer';

@@ -1,7 +1,19 @@
 {
     "name": "dwolke/zf-mailer",
-    "description": "Simple Mailer for Zend Framework 2",
+    "description": "Simple Mailer for Zend Framework",
+    "version": "0.1.0",
     "type": "library",
+    "keywords": ["e-mail", "mailer", "php", "zend framework", "zf2"],
+    "homepage": "http://zfmailer.dw-labs.de",
+    "license": "MIT",
+    "authors":[
+        {
+            "name": "Daniel Wolkenhauer",
+            "email": "hello@dw-labs.de",
+            "homepage": "http://dw-labs.de",
+            "role": "developer"
+        }
+    ],
     "require": {
         "php": "^5.3.3|~7.0",
         "zendframework/zend-stdlib": "^2.5",
@@ -14,13 +26,6 @@
         "phpmd/phpmd": "^2.4",
         "squizlabs/php_codesniffer": "^2.6"
     },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Daniel Wolkenhauer",
-            "email": "dw@dwolke.de"
-        }
-    ],
     "autoload": {
         "psr-0": {
             "ZfMailer": "src/"
