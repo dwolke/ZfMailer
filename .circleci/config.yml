@@ -1,0 +1,97 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+# v.0.2
+
+version: 2
+jobs:
+  build:
+    working_directory: ~/dwolke/zf-mailer
+    parallelism: 1
+    shell: /bin/bash --login
+    environment:
+      CIRCLE_BRANCH: develop
+    docker:
+      # Specify the version you desire here
+      # - image: circleci/php:7.1-node-browsers
+      - image: circleci/php:7.1.17-apache-stretch-node-browsers
+      #  environment:
+      #    MYSQL_ROOT_PASSWORD: passwort
+      #    MYSQL_HOST: 127.0.0.1
+
+    steps:
+      - checkout
+
+      - run:
+          name: Notwendige Tools installieren
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libzip-dev
+            sudo apt-get install -y zlib1g-dev libicu-dev g++
+      
+      # - run:
+      #    name: MySQL installieren
+      #    command: |
+      #      sudo apt-get install mysql-client
+      #      sudo apt-get -y install mysql-server
+
+      # - run:
+      #     name: PHP Erweiterungen installieren
+      #     command: |
+      #       sudo docker-php-ext-install zip
+      #       sudo docker-php-ext-configure intl
+      #       sudo docker-php-ext-install intl
+      #       sudo docker-php-ext-install pdo_mysql
+
+      - run:
+          working_directory: ~/dwolke/zf-mailer
+          command: 'echo ''Europe/Berlin'' | sudo tee -a /etc/timezone; sudo dpkg-reconfigure -f noninteractive tzdata;'
+
+      # - run:
+      #     name: MySQL socket config anpassen
+      #     command: |
+      #       sudo sh -c "echo 'pdo_mysql.default_socket=/var/run/mysqld/mysqld.sock' > /usr/local/etc/php/conf.d/pdo.ini"
+      
+      # - run:
+      #     name: MySQL - Datenbankserver starten
+      #     command: |
+      #       sudo service mysql start
+      #       sleep 2
+      #       ps aux | grep mysql
+
+      # - run:
+      #     name: MySQL - Benutzer ohne Adminrechte anlegen
+      #     command: |
+      #       sudo mysql -u root -e "CREATE user foo IDENTIFIED BY 'passwort';"
+
+      # - run:
+      #     name: MySQL - Testdatenbank importieren und Rechte anpassen
+      #     command: |
+      #       sudo mysql -u root < tests/db/mydb_test.sql
+      #       sudo mysql -u root -e "GRANT ALL PRIVILEGES on mydb_test.* TO foo;"
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            # "composer.lock" can be used if it is committed to the repo
+            - v1-dependencies-{{ checksum "composer.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: composer install -n --prefer-dist
+
+      - save_cache:
+          key: v1-dependencies-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
+
+      - run:
+          name: Tests ausführen (PHPunit)
+          command: |
+            ./vendor/bin/phpunit -c tests/phpunit.xml --coverage-clover=coverage.xml
+
+      - run:
+          name: Upload PHPunit results to codecov
+          command: |
+            bash <(curl -s https://codecov.io/bash) -t 0c8021ca-d8a0-4b66-84b1-bd6cf7f43868

@@ -33,23 +33,16 @@ class MailMessageFactory implements FactoryInterface
    */
   public function createService(ServiceLocatorInterface $serviceLocator)
   {
+    
+    $options = $serviceLocator->get('ZfMailerOptions');
+    // $defaultEncoding = $options->getEncoding();
 
-    $config = $serviceLocator->get('config');
-
-    if ($config instanceof Traversable) {
-      $config = ArrayUtils::iteratorToArray($config);
-    }
-
-    $defaultConfig = $config['zf_mailer']['defaults'];
     $mailMessage = new Message();
 
-    if (isset($defaultConfig['from'])) {
-      $mailMessage->addFrom($defaultConfig['from']);
-    }
-
-    if (isset($defaultConfig['defaultEncoding'])) {
-      $mailMessage->setEncoding($defaultConfig['defaultEncoding']);
-    }
+    // TODO: prüfen, wie Encoding richtig gesetzt werden kann (Sonderzeichen im Header)
+    // if (isset($defaultEncoding)) {
+    //   $mailMessage->setEncoding($defaultEncoding);
+    // }
     
     return $mailMessage;
 

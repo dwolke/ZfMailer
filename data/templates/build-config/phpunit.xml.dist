@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="./tests/Bootstrap.php"
+<phpunit bootstrap="Bootstrap.php"
          colors="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
@@ -12,17 +12,18 @@
 >
 
   <testsuite name="ZfMailer Test Suite">
-    <directory>./tests/ZfMailerTest</directory>
+    <directory>./ZfMailerTest</directory>
   </testsuite>
 
   <filter>
     <whitelist processUncoveredFilesFromWhitelist="true">
-      <directory suffix=".php">./src</directory>
+      <directory suffix=".php">../src</directory>
     </whitelist>
   </filter>
 
   <logging>
-    <log type="coverage-clover" target="./build/tests/clover.xml"/>
+    <log type="coverage-text" target="php://stdout"/>
+    <log type="coverage-clover" target="../build/logs/clover.xml"/>
     <log type="coverage-html" target="./build/tests/reports" lowUpperBound="35" highLowerBound="70"/>
   </logging>
 

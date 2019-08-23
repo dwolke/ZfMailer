@@ -1,0 +1,22 @@
+# Scrutinizer configuration file
+#
+# v.0.2
+
+build:
+  environment:
+    timezone: Europe/Berlin
+    php:
+      version: 7.3.7
+  tests:
+    override:
+      -
+        command: 'vendor/bin/phpunit -c tests/phpunit.xml --coverage-clover=coverage.xml'
+        title: "Unit-Test mit PHPunit"
+        coverage:
+          file: 'coverage.xml'
+          format: 'clover'
+      - php-scrutinizer-run
+      -
+        command: phpcs-run
+        title: "Code-Sniffer"
+        use_website_config: true

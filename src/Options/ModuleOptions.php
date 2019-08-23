@@ -60,7 +60,7 @@ class ModuleOptions extends AbstractOptions
   /**
    * @var string Kennung des Mailers
    */
-  protected $x_mailer = 'ZfMailer 1.0.1';
+  protected $x_mailer = 'ZfMailer 0.1.0';
 
   /**
    * @var string Name des Unternehmens

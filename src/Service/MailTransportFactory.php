@@ -29,50 +29,49 @@ class MailTransportFactory implements FactoryInterface
   /**
    * Create Service Factory
    *
+   * @todo #ZFMAIL-1 - Konfiguration für SSL verbesern
    * @param ServiceLocatorInterface $serviceLocator
    */
   public function createService(ServiceLocatorInterface $serviceLocator)
   {
 
-    $config  = $serviceLocator->get('config');
+    $options = $serviceLocator->get('ZfMailerOptions');
 
-    if ($config instanceof Traversable) {
-      $config = ArrayUtils::iteratorToArray($config);
-    }
+    $smartHost = $options->getSmartHost();
+    $ssl = null;
 
-    $defaultConfig = $config['zf_mailer']['mail_transport'];
-    $transportClass   = $defaultConfig['class'];
-    $transportOptions = $defaultConfig['options'];
-
-    switch ($transportClass) {
-
-      case 'Zend\Mail\Transport\Sendmail':
-      case 'Sendmail':
-      case 'sendmail';
-        $transport = new Transport\Sendmail();
+    switch ($smartHost['server_port']) {
+      case '25':
+        $ssl = null;
         break;
-
-      case 'Zend\Mail\Transport\Smtp';
-      case 'Smtp';
-      case 'smtp';
-        $options = new Transport\SmtpOptions($transportOptions);
-        $transport = new Transport\Smtp($options);
+      case '465':
+        $ssl = 'ssl';
         break;
-
-      case 'Zend\Mail\Transport\File';
-      case 'File';
-      case 'file';
-        $options = new Transport\FileOptions($transportOptions);
-        $transport = new Transport\File($options);
+      case '587':
+        $ssl = 'tls';
         break;
-
+      
       default:
-        throw new \DomainException(sprintf(
-          'Unknown mail transport type provided ("%s")',
-          $transportClass
-        ));
-
+        $ssl = null;
+        break;
     }
+
+    $smtpOptions = array(
+      'host'             => $smartHost['server_name'],
+      'port'             => $smartHost['server_port'],
+      'connectionClass'  => 'login',
+      'connectionConfig' => array(
+        'username' => $smartHost['username'],
+        'password' => $smartHost['password'],
+      ),
+    );
+
+    if (isset($ssl) && !empty($ssl)) {
+      $smtpOptions['connectionConfig']['ssl'] = $ssl;
+    }
+
+    $transportOptions = new Transport\SmtpOptions($smtpOptions);
+    $transport = new Transport\Smtp($transportOptions);
 
     return $transport;
 

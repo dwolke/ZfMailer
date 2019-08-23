@@ -1,0 +1,101 @@
+<?php
+/**
+ * ZfMailer Konfiguration
+ *
+ * Kopiere diese Datei in das Verzeichnis ./config/autoload/ deiner Anwendung
+ * und passe sie deinen Bedürfnissen an.
+ *
+ * @author     Daniel Wolkenhauer <hello@dw-labs.de>
+ * @copyright  Copyright (c) 1997-2019 Daniel Wolkenhauer
+ * @link       http://dw-labs.de/zfmailer
+ * @version    0.1.0
+ */
+
+$settings = array(
+
+  /**
+   * Smarthost
+   *
+   * Der Server, über den die E-Mails gesendet werden sollen.
+   *
+   * Erwartet: Array
+   * Mögliche Werte für 'server_port': 25, 465, 587
+   **/
+  'smart_host' => array(
+    'server_name' => 'servername',
+    'server_port' => 'port',
+    'username' => 'username',
+    'password' => 'password'
+  ),
+
+  /**
+   * Encoding
+   *
+   * Standard-Kodierung für E-Mails
+   *
+   * Erwartet: String
+   * Standard: UTF-8
+   **/
+  // 'encoding' => 'UTF-8',
+
+  /**
+   * Default From
+   *
+   * Standard Absendeadresse, kann beim Versand überschrieben werden
+   *
+   * Erwartet: String
+   * Standard: leer
+   **/
+  // 'default_from' => '',
+
+  /**
+   * Return Path (optional)
+   *
+   * E-Mailadresse an die Unzustellbarkeitsnachrichten geschickt werden
+   *
+   * Erwartet: String
+   * Standard: leer
+   */
+  //'return_path' => '',
+
+  /**
+   * Reply To (optional)
+   *
+   * E-Mailadresse, die beim Antworten auf die Mail verwendet wird
+   *
+   * Erwartet: String
+   * Standard: leer
+   */
+  //'reply_to' => '',
+
+  /**
+   * X-Mailer (optional)
+   *
+   * Individuelle Kennung des Mailers, die beim Versand in den Header eingefügt wird
+   * Wenn keine Kennung mitgeschickt werden soll, hier einen Leer-String setzen
+   *
+   * Erwartet: String
+   * Standard: ZfMailer 0.1.0
+   */
+  // 'x_mailer' => '',
+
+  /**
+   * Organization (optional)
+   *
+   * Name deines Unternehmens, der beim Versand in den Header eingefügt wird
+   *
+   * Erwartet: String
+   * Standard: leer
+   */
+  // 'organization' => '',
+
+);
+
+
+/**
+ * Ab hier bitte NICHTS ändern!
+ */
+
+return array(
+  'ZfMailer' => $settings
+);

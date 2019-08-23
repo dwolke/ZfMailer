@@ -31,11 +31,13 @@ class MailerFactory implements FactoryInterface
   public function createService(ServiceLocatorInterface $serviceLocator)
   {
 
+    $options = $serviceLocator->get('ZfMailerOptions');
     $renderer = $serviceLocator->get('ZfMailer\View\MailRenderer');
     $message = $serviceLocator->get('ZfMailer\Service\MailMessage');
     $transport = $serviceLocator->get('ZfMailer\Service\Transport');
     
     $service = new Mailer();
+    $service->setOptions($options);
     $service->setRenderer($renderer);
     $service->setMailMessage($message);
     $service->setTransport($transport);
