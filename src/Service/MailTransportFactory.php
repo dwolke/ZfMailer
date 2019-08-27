@@ -12,7 +12,9 @@ namespace ZfMailer\Service;
 
 use Traversable;
 use Zend\Mail\Transport;
-use Zend\ServiceManager\FactoryInterface;
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\ArrayUtils;
 
@@ -26,16 +28,10 @@ use Zend\Stdlib\ArrayUtils;
 class MailTransportFactory implements FactoryInterface
 {
 
-  /**
-   * Create Service Factory
-   *
-   * @todo #ZFMAIL-1 - Konfiguration für SSL verbesern
-   * @param ServiceLocatorInterface $serviceLocator
-   */
-  public function createService(ServiceLocatorInterface $serviceLocator)
+  public function __invoke(ContainerInterface $serviceManager, $requestedName, array $options = null)
   {
 
-    $options = $serviceLocator->get('ZfMailerOptions');
+    $options = $serviceManager->get('ZfMailerOptions');
 
     $smartHost = $options->getSmartHost();
     $ssl = null;
@@ -74,6 +70,60 @@ class MailTransportFactory implements FactoryInterface
     $transport = new Transport\Smtp($transportOptions);
 
     return $transport;
+
+    
+
+  }
+
+  /**
+   * Create Service Factory
+   *
+   * @todo #ZFMAIL-1 - Konfiguration für SSL verbesern
+   * @param ServiceLocatorInterface $serviceLocator
+   */
+  public function createService(ServiceLocatorInterface $serviceLocator)
+  {
+
+    // $options = $serviceLocator->get('ZfMailerOptions');
+
+    // $smartHost = $options->getSmartHost();
+    // $ssl = null;
+
+    // switch ($smartHost['server_port']) {
+    //   case '25':
+    //     $ssl = null;
+    //     break;
+    //   case '465':
+    //     $ssl = 'ssl';
+    //     break;
+    //   case '587':
+    //     $ssl = 'tls';
+    //     break;
+      
+    //   default:
+    //     $ssl = null;
+    //     break;
+    // }
+
+    // $smtpOptions = array(
+    //   'host'             => $smartHost['server_name'],
+    //   'port'             => $smartHost['server_port'],
+    //   'connectionClass'  => 'login',
+    //   'connectionConfig' => array(
+    //     'username' => $smartHost['username'],
+    //     'password' => $smartHost['password'],
+    //   ),
+    // );
+
+    // if (isset($ssl) && !empty($ssl)) {
+    //   $smtpOptions['connectionConfig']['ssl'] = $ssl;
+    // }
+
+    // $transportOptions = new Transport\SmtpOptions($smtpOptions);
+    // $transport = new Transport\Smtp($transportOptions);
+
+    // return $transport;
+    return $this->__invoke($serviceLocator, null);
 
   }
 
