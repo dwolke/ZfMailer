@@ -1,7 +1,7 @@
 {
     "name": "dwolke/zf-mailer",
     "description": "Simple Mailer for Zend Framework",
-    "version": "0.1.0",
+    "version": "3.0.0",
     "type": "library",
     "keywords": ["e-mail", "mailer", "php", "zend framework", "zf2"],
     "homepage": "http://zfmailer.dw-labs.de",
