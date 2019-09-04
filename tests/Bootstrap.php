@@ -3,7 +3,7 @@
 * Bootstrapping the tests
 *
 * @author Daniel Wolkenhauer <hello@dw-labs.de>
-* @version 0.1.0
+* @version 1.0.0
 * @package Tests
 */
 

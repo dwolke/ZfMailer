@@ -1,5 +1,12 @@
+# ZfMailer
+# ---------------
 # Scrutinizer configuration file
 #
+# Author:       Daniel Wolkenhauer <hello@dw-labs.de>
+# Copyright:    (c) 2012 -2019 Daniel Wolkenhauer
+# Home:         http://dw-labs.de
+# Version:      1.0.0
+# -----
 # v.0.2
 
 build:

@@ -1,8 +1,7 @@
 # ZfMailer
 > Simple Mailer for the Zend Framework
 
-[![Latest Unstable Version][icon-unstable]][link-unstable] [![License][icon-license]][link-license] [![Build Status][icon-build]][link-build] [![Code Coverage][icon-codecov]][link-codecov]
-
+[![Latest Stable Version][icon-stable]][link-stable] [![Latest Unstable Version][icon-unstable]][link-unstable] [![License][icon-license]][link-license] [![Build Status][icon-build]][link-build] [![Code Coverage][icon-codecov]][link-codecov]
 
 **WARNING:** This module is currently under  heavy development and is not intended for use in productive environment.
 
@@ -58,15 +57,15 @@ Copy the configuration file from `vendor/dwolke/zf-mailer/config/zfmailer.local.
 The following options are available:
 
 * **smart_host** [array] - configures the server that sends the mails
-  * **server_name** [string] - servers hostname
-  * **server_port** [string] - tcp port, default is 25
-  * **username** [string] - username for connection to the server
+  * **server_name** [string] - servers host name
+  * **server_port** [string] - TCP port, default is 25
+  * **username** [string] - user name for connection to the server
   * **password** [string] - password for connection to the server
 * **encoding** [string, optional] - default is 'UTF-8'
 * **default_from** [string, optional] - This e-mail address for the sender will be used if no sender address is specified when sending an e-mail.
 * **return_path** [string, optional] - Address to which bounces are sent
-* **reply_to** [string, optional] - Address to which replys are sent.
-* **x_mailer** [string, optinal] - Adds the 'X-Mailer' header to an e-mail
+* **reply_to** [string, optional] - Address to which replies are sent.
+* **x_mailer** [string, optional] - Adds the 'X-Mailer' header to an e-mail
 * **organization** [string, optional] - Adds the 'Organization' header to an e-mail
 
 ## Usage
@@ -92,15 +91,17 @@ That's all.
 
 
 ---
-Copyright © 2012 - 2019 by dwLabs. Alle Rechte vorbehalten. 😎
+Copyright © 2012 - 2019 by dwLabs. All Rights reserved. 😎
 
 
+[icon-stable]: https://poser.pugx.org/dwolke/zf-mailer/v/stable
 [icon-unstable]: https://poser.pugx.org/dwolke/zf-mailer/v/unstable
 [icon-license]: https://poser.pugx.org/dwolke/zf-mailer/license
 [icon-build]: https://scrutinizer-ci.com/g/dwolke/ZfMailer/badges/build.png?b=develop
 [icon-codecov]: https://scrutinizer-ci.com/g/dwolke/ZfMailer/badges/coverage.png?b=develop
 
 
+[link-stable]: https://packagist.org/packages/dwolke/zf-mailer
 [link-unstable]: https://packagist.org/packages/dwolke/zf-mailer
 [link-license]: https://packagist.org/packages/dwolke/zf-mailer
 [link-build]: https://scrutinizer-ci.com/g/dwolke/ZfMailer/build-status/develop

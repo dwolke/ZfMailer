@@ -75,7 +75,7 @@ $settings = array(
    * Wenn keine Kennung mitgeschickt werden soll, hier einen Leer-String setzen
    *
    * Erwartet: String
-   * Standard: ZfMailer 0.1.0
+   * Standard: ZfMailer 1.0.0
    */
   // 'x_mailer' => '',
 
