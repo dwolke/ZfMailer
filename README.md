@@ -1,5 +1,5 @@
 # ZfMailer
-> Simple Mailer for the Zend Framework
+> Simple Mailer for the Zend Framework v2
 
 [![Latest Stable Version][icon-stable]][link-stable] [![Latest Unstable Version][icon-unstable]][link-unstable] [![License][icon-license]][link-license] [![Build Status][icon-build]][link-build] [![Code Coverage][icon-codecov]][link-codecov]
 
@@ -7,7 +7,7 @@
 
 ## Introduction
 
-ZfMailer is a simple e-mail module for Zend Framework based on *Zend\Mail*. E-mails can be sent in text format or as MIME-compliant "multi-part" mails. Sending e-mails with attachments is also supported.
+ZfMailer is a simple e-mail module for Zend Framework 2 based on *Zend\Mail*. E-mails can be sent in text format or as MIME-compliant "multi-part" mails. Sending e-mails with attachments is also supported.
 
 Currently, only sending e-mails by SMTP is supported. Maybe this module will be extended later with further possibilities.
 
