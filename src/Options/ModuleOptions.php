@@ -5,7 +5,7 @@
  * @author     Daniel Wolkenhauer <hello@dw-labs.de>
  * @copyright  Copyright (c) 1997-2019 Daniel Wolkenhauer
  * @link       http://dw-labs.de/zfmailer
- * @version    1.0.0
+ * @version    2.0.0
  */
 
 namespace ZfMailer\Options;
@@ -60,7 +60,7 @@ class ModuleOptions extends AbstractOptions
   /**
    * @var string Kennung des Mailers
    */
-  protected $x_mailer = 'ZfMailer 1.0.0';
+  protected $x_mailer = 'ZfMailer 2.0.0';
 
   /**
    * @var string Name des Unternehmens
