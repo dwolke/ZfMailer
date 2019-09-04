@@ -1,14 +1,14 @@
 # ZfMailer
-> Simple Mailer for the Zend Framework
+> Simple Mailer for the Zend Framework v3
 
-[![Latest Unstable Version][icon-unstable]][link-unstable] [![License][icon-license]][link-license] [![Build Status][icon-build]][link-build] [![Code Coverage][icon-codecov]][link-codecov]
+[![Latest Stable Version][icon-stable]][link-stable] [![Latest Unstable Version][icon-unstable]][link-unstable] [![License][icon-license]][link-license] [![Build Status][icon-build]][link-build] [![Code Coverage][icon-codecov]][link-codecov]
 
 
 **WARNING:** This module is currently under  heavy development and is not intended for use in productive environment.
 
 ## Introduction
 
-ZfMailer is a simple e-mail module for Zend Framework based on *Zend\Mail*. E-mails can be sent in text format or as MIME-compliant "multi-part" mails. Sending e-mails with attachments is also supported.
+ZfMailer is a simple e-mail module for Zend Framework 3 based on *Zend\Mail*. E-mails can be sent in text format or as MIME-compliant "multi-part" mails. Sending e-mails with attachments is also supported.
 
 Currently, only sending e-mails by SMTP is supported. Maybe this module will be extended later with further possibilities.
 
@@ -16,19 +16,12 @@ Currently, only sending e-mails by SMTP is supported. Maybe this module will be 
 
 ### Main Setup
 
-1. Add this project and the requirements in your composer.json:
-
-```json
-"require": {
-  "dwolke/zf-mailer": "dev-master"
-}
-```
-
-2. Now tell composer to download ZfMailer by running the command:
+1. Add this module to your project by running the command
 
 ```bash
-$ php composer.phar update
+$ composer require dwolke/zf-mailer
 ```
+
 
 ### Post Installation
 
@@ -95,12 +88,14 @@ That's all.
 Copyright © 2012 - 2019 by dwLabs. Alle Rechte vorbehalten. 😎
 
 
+[icon-stable]: https://poser.pugx.org/dwolke/zf-mailer/v/stable
 [icon-unstable]: https://poser.pugx.org/dwolke/zf-mailer/v/unstable
 [icon-license]: https://poser.pugx.org/dwolke/zf-mailer/license
 [icon-build]: https://scrutinizer-ci.com/g/dwolke/ZfMailer/badges/build.png?b=develop
 [icon-codecov]: https://scrutinizer-ci.com/g/dwolke/ZfMailer/badges/coverage.png?b=develop
 
 
+[link-stable]: https://packagist.org/packages/dwolke/zf-mailer
 [link-unstable]: https://packagist.org/packages/dwolke/zf-mailer
 [link-license]: https://packagist.org/packages/dwolke/zf-mailer
 [link-build]: https://scrutinizer-ci.com/g/dwolke/ZfMailer/build-status/develop
